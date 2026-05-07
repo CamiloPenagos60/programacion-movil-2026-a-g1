@@ -1,0 +1,120 @@
+{
+  "instituciones": [
+    {
+      "codigo": "SENA",
+      "nombre": "SENA",
+      "rol": "Instructor",
+      "unidad": "Ficha"
+    },
+    {
+      "codigo": "CORHUILA",
+      "nombre": "CORHUILA",
+      "rol": "Docente",
+      "unidad": "Materia"
+    }
+  ],
+  "grupos_academicos": [
+    {
+      "codigo": "ficha-2876541",
+      "nombre": "ADSO 2876541",
+      "tipo": "ficha",
+      "institucion": "SENA",
+      "personas": [
+        {
+          "documento": "1001001001",
+          "nombre": "Carlos Rojas",
+          "matricula": "SENA-2876541-001"
+        },
+        {
+          "documento": "1001001002",
+          "nombre": "Paula Nunez",
+          "matricula": "SENA-2876541-002"
+        },
+        {
+          "documento": "1001001003",
+          "nombre": "Diego Prada",
+          "matricula": "SENA-2876541-003"
+        },
+        {
+          "documento": "1001001004",
+          "nombre": "Luisa Mendez",
+          "matricula": "SENA-2876541-004"
+        }
+      ]
+    },
+    {
+      "codigo": "ficha-2876542",
+      "nombre": "ADSO 2876542",
+      "tipo": "ficha",
+      "institucion": "SENA",
+      "personas": [
+        {
+          "documento": "1001001002",
+          "nombre": "Paula Nunez",
+          "matricula": "SENA-2876542-001"
+        },
+        {
+          "documento": "1001001005",
+          "nombre": "Andres Sosa",
+          "matricula": "SENA-2876542-002"
+        },
+        {
+          "documento": "1001001006",
+          "nombre": "Maria Gil",
+          "matricula": "SENA-2876542-003"
+        },
+        {
+          "documento": "1001001007",
+          "nombre": "Johan Rivas",
+          "matricula": "SENA-2876542-004"
+        }
+      ]
+    },
+    {
+      "codigo": "algoritmos",
+      "nombre": "Algoritmos",
+      "tipo": "materia",
+      "institucion": "CORHUILA",
+      "personas": [
+        {
+          "documento": "2002002001",
+          "nombre": "Laura Prieto",
+          "matricula": "U-2026-001"
+        },
+        {
+          "documento": "2002002002",
+          "nombre": "Miguel Duran",
+          "matricula": "U-2026-002"
+        },
+        {
+          "documento": "2002002003",
+          "nombre": "Sara Pineda",
+          "matricula": "U-2026-003"
+        }
+      ]
+    },
+    {
+      "codigo": "bases-de-datos",
+      "nombre": "Bases de Datos",
+      "tipo": "materia",
+      "institucion": "CORHUILA",
+      "personas": [
+        {
+          "documento": "2002002002",
+          "nombre": "Miguel Duran",
+          "matricula": "U-2026-002"
+        },
+        {
+          "documento": "2002002004",
+          "nombre": "Valentina Rojas",
+          "matricula": "U-2026-004"
+        },
+        {
+          "documento": "2002002005",
+          "nombre": "Nicolas Parra",
+          "matricula": "U-2026-005"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "app-attendance-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aplicacion de asistencia academica con Ionic React, API y MongoDB local.",
+  "scripts": {
+    "install:all": "npm --prefix back install && npm --prefix app install",
+    "dev:back": "npm --prefix back run dev",
+    "dev:app": "npm --prefix app run dev",
+    "build": "npm --prefix back run build && npm --prefix app run build",
+    "typecheck": "npm --prefix back run typecheck && npm --prefix app run typecheck",
+    "docker:up": "docker compose up -d",
+    "docker:logs": "docker compose logs -f api mongo",
+    "docker:down": "docker compose down",
+    "lint": "npm --prefix back run lint && npm --prefix app run lint",
+    "format": "npm --prefix back run format && npm --prefix app run format",
+    "test": "npm --prefix back run test"
+  }
+}
+

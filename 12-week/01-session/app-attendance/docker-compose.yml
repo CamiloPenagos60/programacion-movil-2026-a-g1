@@ -1,0 +1,75 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: app-attendance-mongo
+    restart: unless-stopped
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-attendance}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-attendance_dev_password}
+      MONGO_INITDB_DATABASE: ${APP_ATTENDANCE_DB_NAME:-app_attendance}
+    volumes:
+      - app_attendance_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./back
+    container_name: app-attendance-api
+    restart: unless-stopped
+    depends_on:
+      db-seed:
+        condition: service_completed_successfully
+    ports:
+      - "${API_PORT:-4000}:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGO_URI: ${MONGO_URI:-mongodb://attendance:attendance_dev_password@mongo:27017/app_attendance?authSource=admin}
+      API_CORS_ORIGIN: ${API_CORS_ORIGIN:-*}
+      QR_DEFAULT_TTL_MINUTES: ${QR_DEFAULT_TTL_MINUTES:-10}
+      QR_TOKEN_TTL_SECONDS: ${QR_TOKEN_TTL_SECONDS:-20}
+      ROOM_CODE_TTL_SECONDS: ${ROOM_CODE_TTL_SECONDS:-90}
+      JWT_SECRET: ${JWT_SECRET:-super-secret-key-for-dev-only}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-}
+
+  app:
+    build:
+      context: ./app
+      args:
+        VITE_PUBLIC_FRONTEND_URL: ${VITE_PUBLIC_FRONTEND_URL:-}
+    container_name: app-attendance-app
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "${APP_PORT:-8080}:80"
+
+  db-seed:
+    image: mongo:7
+    container_name: app-attendance-db-seed
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - ./db/scripts:/scripts:ro
+      - ./db/source:/source:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-attendance}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-attendance_dev_password}
+      APP_ATTENDANCE_DB_NAME: ${APP_ATTENDANCE_DB_NAME:-app_attendance}
+      SEED_SOURCE_PATH: ${SEED_SOURCE_PATH:-}
+    command:
+      - bash
+      - -lc
+      - >
+        mongosh "mongodb://$${MONGO_INITDB_ROOT_USERNAME}:$${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/$${APP_ATTENDANCE_DB_NAME}?authSource=admin"
+        /scripts/initial-data.mongodb.js
+
+volumes:
+  app_attendance_mongo_data:

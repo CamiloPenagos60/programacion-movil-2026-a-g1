@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+app/node_modules/
+back/node_modules/
+
+# builds
+dist/
+app/dist/
+back/dist/
+coverage/
+
+# local env
+.env
+.env.local
+app/.env
+app/.env.local
+back/.env
+back/.env.local
+
+# Capacitor and native build output
+app/android/
+app/ios/
+
+# logs and OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# local docker data if mounted manually
+db/data/
+db/mongo/*
+!db/mongo/README.md
+
+# real attendance data (sensitive)
+db/source/seed_asistencia_corhuila_sena_mongo_local.json
